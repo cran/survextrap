@@ -29,7 +29,7 @@ options(mc.cores = 2) # CRAN check limits to 2 cores
 
 This vignette gives a quick tour of the features of the `survextrap` package, showing how to use it to fit a range of survival models.   See the [cetuximab case study](https://chjackson.github.io/survextrap/articles/cetuximab.html) for a more in-depth demonstration of how it might be used in a typical health technology assessment. 
 
-See the [README](../index.html) for the design principles of the package, and the [methods vignette](methods.html) for technical details of the methods.
+See the [home page](https://chjackson.github.io/survextrap/) for the design principles of the package, and the [methods vignette](methods.html) for technical details of the methods.
 
 
 # Examples
@@ -433,7 +433,7 @@ plot(survfit(Surv(t, status) ~ 1, data=curedata))
 noncure_mod <- survextrap(Surv(t, status) ~ 1, data=curedata, fit_method = "opt")
 plot_survival(noncure_mod,tmax=5) 
 
-cure_mod <- survextrap(Surv(t, status) ~ 1, data=curedata, cure=TRUE, iter=1000, fit_method="opt")
+cure_mod <- survextrap(Surv(t, status) ~ 1, data=curedata, cure=TRUE, iter=300, chains=1, loo=FALSE)
 plot(cure_mod, tmax=10, niter=20) 
 ```
 
@@ -476,7 +476,7 @@ mod <- survextrap(Surv(years, status) ~ 1, data=colons, fit_method="opt")
 mod_bh <- survextrap(Surv(years, status) ~ 1, data=colons, fit_method="opt", backhaz=bh)
 ```
 
-The posterior medians of the survival and hazard functions under `mod_bh` are overlaid on the posterior distributions from `mod`.   The fitted survival and hazard in the short term agrees under both models, but the survival is worse in the long term when the increase in the background hazard at times 3, 5 and 10 is accounted for. 
+The posterior medians of the survival and hazard functions under `mod_bh` are overlaid on the posterior distributions from `mod`.   The fitted survival and hazard in the short term agree under both models, but the survival is worse in the long term when the increase in the background hazard at times 3, 5 and 10 is accounted for. 
 
 ```{r}
 plot_survival(mod, tmax=15, niter=20) + 

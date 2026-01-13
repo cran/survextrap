@@ -139,7 +139,7 @@ plot(survfit(Surv(t, status) ~ 1, data=curedata))
 noncure_mod <- survextrap(Surv(t, status) ~ 1, data=curedata, fit_method = "opt")
 plot_survival(noncure_mod,tmax=5) 
 
-cure_mod <- survextrap(Surv(t, status) ~ 1, data=curedata, cure=TRUE, iter=1000, fit_method="opt")
+cure_mod <- survextrap(Surv(t, status) ~ 1, data=curedata, cure=TRUE, iter=300, chains=1, loo=FALSE)
 plot(cure_mod, tmax=10, niter=20) 
 
 ## -----------------------------------------------------------------------------
